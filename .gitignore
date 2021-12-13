@@ -1,0 +1,6 @@
+data
+results
+cache
+temp/*
+.DS_Store
+__pycache__

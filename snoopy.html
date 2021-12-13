@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Ease.ml/snoopy</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+    <!-- CSS Files -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/material-bootstrap-wizard.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="image-container set-full-height" style="background-color: lightgray">
+          <!--   Big container   -->
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-1">
+                <!--      Wizard container        -->
+                <div class="wizard-container">
+                  <div class="card wizard-card" data-color="blue" id="wizardProfile">
+                    <form action="" method="">
+                      <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+
+                      <div class="wizard-header">
+                        <h3 class="wizard-title">
+                          Ease.ml/snoopy
+                        </h3>
+                        <h5>Machine Learning Feasibility Study</h5>
+                      </div>
+                      <div class="wizard-navigation">
+                        <ul>
+                          <li><a href="#input" data-toggle="tab">Input</a></li>
+                          <li><a href="#filter" data-toggle="tab">Filter</a></li>
+                          <li><a href="#eval" data-toggle="tab">Evaluate</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="tab-content">
+                        <div class="tab-pane" id="input">
+                          <div class="row">
+                            <h4 class="info-text">Please select the dataset and the target accuracy</h4>
+                            <div class="col-sm-7 col-sm-offset-1">
+                              <div class="input-group">
+                                <div class="form-group label-floating">
+                                  <p>Choose the dataset type:</p>
+                                  <input type="radio" id="radio_vision" name="data_type" value="vision" checked="checked">
+                                  <label for="radio_vision"> Images </label>
+                                  <input type="radio" id="radio_nlp" name="data_type" value="nlp">
+                                  <label for="radio_nlp"> Text </label>
+                                  <br />
+                                  <br />
+                                  <div id="datasets_vision">
+                                    <p>Image Dataset (TFDS):</p>
+                                    <select name="tfds_vision" id="tfds_vision">
+                                      <option value="mnist">&nbsp;MNIST&nbsp;</option>
+                                      <option value="cifar10">&nbsp;CIFAR10&nbsp;</option>
+                                      <option value="cifar100">&nbsp;CIFAR100&nbsp;</option>
+                                    </select>
+                                  </div>
+                                  <div id="datasets_nlp">
+                                    <p>NLP Dataset (TFDS):</p>
+                                    <select name="tfds_nlp" id="tfds_nlp">
+                                      <option value="imdb_reviews">&nbsp;IMDB&nbsp;</option>
+                                      <option value="glue">&nbsp;CoLa&nbsp;</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- <div class="picture-container">
+                                <div class="picture">
+                                <img src="assets/img/upload.png" class="picture-src" id="wizardDatasetPreview" title=""/>
+                                <input type="file" id="wizard-dataset">
+                                </div>
+                                <h6>Choose Files</h6>
+                                </div> -->
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="input-group">
+                                <div class="form-group label-floating">
+                                  <label class="control-label">Accuracy <small>(required)</small></label>
+                                  <input name="accuracy" type="text" class="form-control" value="0.8">
+                                </div>
+                                <div class="form-group label-floating">
+                                  <label class="control-label">Label Noise <small>(optional)</small></label>
+                                  <input name="label_noise" type="text" class="form-control">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="filter">
+                          <h4 class="info-text"> Select available pre-trained embeddings </h4>
+                          <div id="vision_embeddings">
+                            <div class="row">
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="dummy_img" name="vision_embeddings" checked>
+                                    Raw (No Transformation)
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="alexnet" name="vision_embeddings">
+                                    PyTorch Hub Model: AlexNet
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="googlenet" name="vision_embeddings">
+                                    PyTorch Hub Model: GoogleNet
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="vgg19" name="vision_embeddings">
+                                    PyTorch Hub Model: VGG-19
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="inceptionv3" name="vision_embeddings">
+                                    TF-Hub Module: InceptionV3
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="efficientnetb7" name="vision_embeddings">
+                                    TF-Hub Module: EfficientNet-B7
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div id="nlp_embeddings">
+                            <div class="row">
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="use" name="nlp_embeddings">
+                                    Universal Sentence Encoder (USE)
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-10 col-sm-offset-1">
+                                <div class="checkbox">
+                                  <label style="color: #666; font-size: 16px;">
+                                    <input type="checkbox" value="bert" name="nlp_embeddings">
+                                    BERT
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="eval">
+                          <div class="row">
+                            <div class="col-sm-12" align="center" id="result_img">
+                              <img src="assets/img/not_started.png"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="wizard-footer">
+                        <div class="pull-right">
+                          <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
+                          <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Refresh' />
+                        </div>
+
+                        <div class="pull-left">
+                          <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                        </div>
+
+                        <div align="center">
+                          <img id="img_not_achievable" style="display: none;" src="assets/img/not_achievable.png"/>
+                          <img id="img_achievable" style="display: none;" src="assets/img/achievable.png"/>
+                          <img id="img_running" style="display: none;" src="assets/img/running.png"/>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </form>
+                  </div>
+                </div> <!-- wizard container -->
+              </div>
+            </div><!-- end row -->
+          </div> <!--  big container -->
+
+         <!-- <div class="footer">
+            <div class="container text-center">
+            Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/bootstrap-wizard">here.</a>
+            </div>
+         </div> -->
+    </div>
+
+  </body>
+  <!--   Core JS Files   -->
+  <script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+  <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="assets/js/jquery.bootstrap.js" type="text/javascript"></script>
+
+  <!--  Plugin for the Wizard -->
+  <script src="assets/js/material-bootstrap-wizard.js"></script>
+
+  <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+  <script src="assets/js/jquery.validate.min.js"></script>
+
+</html>
