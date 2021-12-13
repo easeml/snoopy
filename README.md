@@ -43,18 +43,29 @@ The second example offers illustrates how to use [ease.ml/Snoopy](https://www.ea
 }
 
 % Theory on BER Estimator Convergence
-@article{rimanic2020convergence,
-  title={On Convergence of Nearest Neighbor Classifiers over Feature Transformations},
-  author={Rimanic, Luka and Renggli, Cedric and Li, Bo and Zhang, Ce},
-  journal={arXiv preprint arXiv:2010.07765},
-  year={2020}
+@article{rimanic2020convergence, 
+  title={On Convergence of Nearest Neighbor Classifiers over Feature Transformations}, 
+  author={Rimanic, Luka and Renggli, Cedric and Li, Bo and Zhang, Ce}, 
+  journal={Advances in Neural Information Processing Systems}, 
+  volume={33}, 
+  year={2020} 
 }
 
 % Framework for BER Estimator Comparison
-@inproceedings{renggli2021evaluating,
+@article{renggli2021evaluating, 
   title={Evaluating Bayes Error Estimators on Real-World Datasets with FeeBee},
   author={Renggli, Cedric and Rimanic, Luka and Hollenstein, Nora and Zhang, Ce},
-  booktitle={Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2)},
+  journal={Advances in Neural Information Processing Systems, Datasets and Benchmarks Track},
+  volume={34},
   year={2021}
+}
+
+% Demo
+@article{renggli2020ease,
+  title={Ease.ml/snoopy in action: Towards automatic feasibility analysis for machine learning application development}, 
+  author={Renggli, Cedric and Rimanic, Luka and Kolar, Luka and Wu, Wentao and Zhang, Ce}, 
+  journal={Proceedings of the VLDB Endowment}, 
+  volume={13}, 
+  year={2020}
 }
 ```
