@@ -98,10 +98,11 @@ class ResultStoringObserver(Observer):
             np.savez(os.path.join(output_files_path, filename_mapping[key]), n=x, err=y)
         
 class BerStoringObserver(Observer):
-    def __init__(self, classes):
+    def __init__(self, classes, test_size):
         # Order is needed so that 'state_string' retains order of embeddings
         self._result_history = OrdD()
         self._classes = classes
+        self._test_size = test_size
 
     def on_update(self, name: str, progress_result: ProgressResult):
         if name not in self._result_history:
@@ -128,7 +129,7 @@ class BerStoringObserver(Observer):
         for key in self._result_history:
             chain = self._result_history[key]
             x = [i.num_train_points_processed for i in chain]
-            y = [_get_lowerbound(i.num_errors/float(i.num_train_points_processed), self._classes) if i.num_train_points_processed > 0 else 0 for i in chain]
+            y = [_get_lowerbound(i.num_errors/float(self._test_size), self._classes) for i in chain]
 
             _logger.debug(f"Storing embedding '{key}' to file '{filename_mapping[key]}'")
             np.savez(os.path.join(output_files_path, filename_mapping[key]), n=x, ber=y)
