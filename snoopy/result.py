@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from collections import OrderedDict as OrdD
 from typing import Dict, NamedTuple
 
+import math
 import numpy as np
 
 from ._logging import get_logger
@@ -95,6 +96,42 @@ class ResultStoringObserver(Observer):
 
             _logger.debug(f"Storing embedding '{key}' to file '{filename_mapping[key]}'")
             np.savez(os.path.join(output_files_path, filename_mapping[key]), n=x, err=y)
+        
+class BerStoringObserver(Observer):
+    def __init__(self, classes):
+        # Order is needed so that 'state_string' retains order of embeddings
+        self._result_history = OrdD()
+        self._classes = classes
+
+    def on_update(self, name: str, progress_result: ProgressResult):
+        if name not in self._result_history:
+            self._result_history[name] = []
+
+        self._result_history[name].append(progress_result)
+
+        state_string = "Current result: "
+        for name in self._result_history:
+            state_string += f"\n\t{name}: {self._result_history[name][-1]}"
+        _logger.info(state_string)
+
+    def store(self, output_files_path: str, filename_mapping: Dict[str, str] = None):
+        # Use name given to embedding as filename
+        if filename_mapping is None:
+            filename_mapping = {x: x for x in self._result_history}
+
+        def _get_lowerbound(value, classes):
+            return ((classes - 1.0)/float(classes)) * (1.0 - math.sqrt(max(0.0, 1 - ((float(classes) / (classes - 1.0)) * value))))
+
+        assert set(self._result_history.keys()) == set(filename_mapping.keys()), \
+            f"Filename should be specified for each embedding!"
+
+        for key in self._result_history:
+            chain = self._result_history[key]
+            x = [i.num_train_points_processed for i in chain]
+            y = [_get_lowerbound(i.num_errors/float(i.num_train_points_processed), self._classes) if i.num_train_points_processed > 0 else 0 for i in chain]
+
+            _logger.debug(f"Storing embedding '{key}' to file '{filename_mapping[key]}'")
+            np.savez(os.path.join(output_files_path, filename_mapping[key]), n=x, ber=y)
 
 
 class SinglePlotResult:
