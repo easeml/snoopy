@@ -3,25 +3,23 @@
 [Ease.ml/Snoopy](https://www.ease.ml/snoopy) is a library to estimate the _best_ accuracy _any_ machine learning model can achieve on the given data distribution.
 The core of [ease.ml/Snoopy](https://www.ease.ml/snoopy) is a powerfull, computationally efficient Bayes error rate (BER) estimator relying on pre-trained feature transformations available online.
 
-## Requirements and Installation
+### Supported Functionality
+
+The library uses pre-trained embeddings and simple BER lower bound estimators to _guess_ the best possible accuracy any ML model can achieve. The system will return a binary signal by comparing the target error with the BER lower bound estimate (_feasible_ if above, _infeasible_ otherwise). Beeing aware of different failure modes (mainly false negatives), we also provide the convergence plots for additional insights. If the best transformation did not converge and the curve is likely to fall below the target accuracy with more data, users might want to collect more data and re-run to evaluation. On the other hand, if the curve did converge, users might want to try other pre-trained embeddings to bypass the possible bias introduced by using a transformation in the first place. An illustrative example is given in the jupyter notebook example below.
+
+### Requirements and Installation
 
 Run the script ```bash install.sh``` to create the conda environment with GPU support, and the script ```bash install-cpu.sh``` to install without GPU support. The dependencies will be automatically installed via ```conda```.
 
-After successfully having created the conda evironments, active either the environment ```snoopy``` (with GPU support) or ```snoopy-cpu``` (without GPU support), using ```conda activate``` and the corresponding environment name as additional argument.
+After successfully having created the conda environments, active either the environment ```snoopy``` (with GPU support) or ```snoopy-cpu``` (without GPU support), using ```conda activate``` and the corresponding environment name as additional argument.
 
 ## Quick Start
 
-The [ease.ml/Snoopy](https://www.ease.ml/snoopy) library is containted in the directory ```snoopy```. We provide two examples on how to use the library: (1) inside a single function in a python file, and (2) in a web application using a REST API.
+The [ease.ml/Snoopy](https://www.ease.ml/snoopy) library is containted in the directory ```snoopy```. We provide two examples on how to use the library: (1) inside a jupyter notebook, and (2) in a web application using a REST API.
 
-### Example 1: Python
+### Example 1: Jupyter Notebook
 
-The python script ```main.py``` contains a minimal example on how to use our library.
-There are several steps involved in how to use our library:
-- First, train and test datasets, or readers as they are called in the library, need to be defined. Several different sources are defined in the package ```snoopy.reader```.
-- Then, models or pre-trained embeddings are defined over the ordered dictionary models. Various embeddings from sources such as [PyTorch Hub](https://pytorch.org/hub/) or [TF Hub](https://tfhub.dev/) are available via the package ```snoopy.embedding```.
-- The observer defined next is responsible to store the results on disk (final classifier accuary or also intermediate results)
-- The ```run``` command from the package ```snoopy.pipeline``` will then execute the entire computation.
-- Finally, as we only store the 1NN classifier accuracy on disk, we derive the corresponding lower bounds using the exported classifier accuracies.
+The jupyter notebook ```ExampleUsage.ipynb``` contains a minimal example on how to use our library and how to interpret the results. The jupyter notebook needs to be started after activating the conda environment.
 
 ### Example 2: WebApp and REST API
 
