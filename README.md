@@ -32,6 +32,10 @@ The second example offers illustrates how to use [ease.ml/Snoopy](https://www.ea
 - The service will use the functionality in the python file ```service.py```, whereby the functionality is very similar to example 1, where instaed of having everything chronolagically in a single python function, the functionality is spread across different functions.
 - The website is contained in the html file ```snoopy.html```. The javascript for accessing the REST API are visible in the file ```assets/js/material-bootstrap-wizard.js```.
 
+**WebApp demo:**
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/HQ0E1j35pU4/0.jpg)](https://www.youtube.com/watch?v=HQ0E1j35pU4&t=324)
+
 ## Citations
 
 ```bibtex
