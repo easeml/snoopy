@@ -1,5 +1,8 @@
 # Ease.ml/Snoopy
 
+![GitHub](https://img.shields.io/github/license/easeml/snoopy)
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
+
 [Ease.ml/Snoopy](https://www.ease.ml/snoopy) is a library to estimate the _best_ accuracy _any_ machine learning model can achieve on the given data distribution.
 The core of [ease.ml/Snoopy](https://www.ease.ml/snoopy) is a powerfull, computationally efficient Bayes error rate (BER) estimator relying on pre-trained feature transformations available online.
 
