@@ -6,6 +6,8 @@
 [Ease.ml/Snoopy](https://www.ease.ml/snoopy) is a library to estimate the _best_ accuracy _any_ machine learning model can achieve on the given data distribution.
 The core of [ease.ml/Snoopy](https://www.ease.ml/snoopy) is a powerfull, computationally efficient Bayes error rate (BER) estimator relying on pre-trained feature transformations available online.
 
+For the extended version of our system paper please check [this paper](https://arxiv.org/abs/2010.08410) (citation below).
+
 ### Supported Functionality
 
 The library uses pre-trained embeddings and simple BER lower bound estimators to _guess_ the best possible accuracy any ML model can achieve. The system will return a binary signal by comparing the target error with the BER lower bound estimate (_feasible_ if above, _infeasible_ otherwise). Beeing aware of different failure modes (mainly false negatives), we also provide the convergence plots for additional insights. If the best transformation did not converge and the curve is likely to fall below the target accuracy with more data, users might want to collect more data and re-run to evaluation. On the other hand, if the curve did converge, users might want to try other pre-trained embeddings to bypass the possible bias introduced by using a transformation in the first place. An illustrative example is given in the jupyter notebook example below.
@@ -40,11 +42,11 @@ The second example offers illustrates how to use [ease.ml/Snoopy](https://www.ea
 
 ```bibtex
 % System 
-@article{renggli2020ease,
-  title={Ease.ml/snoopy: Towards Automatic Feasibility Study for Machine Learning Applications},
-  author={Renggli, Cedric and Rimanic, Luka and Kolar, Luka and Hollenstein, Nora and Wu, Wentao and Zhang, Ce},
+@article{renggli2022snoopy_system,
+  title={Ease.ML/Snoopy: Towards Automatic Feasibility Studies for ML via Quantitative Understanding of "Data Quality for ML"},
+  author={Renggli, Cedric and Rimanic, Luka and Kolar, Luka and and Wu, Wentao and Zhang, Ce},
   journal={arXiv preprint arXiv:2010.08410},
-  year={2020}
+  year={2022}
 }
 
 % Theory on BER Estimator Convergence
